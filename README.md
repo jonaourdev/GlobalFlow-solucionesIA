@@ -39,11 +39,18 @@ text/
 ### 1) Abrir el proyecto
 
 Abrir el proyecto y ubicarse en la carpeta
+
+```bash
 cd ruta\de\tu\proyecto\text\globalflow
+```
 
 ### 2) Instalar dependencias
 
-Con el comando dentro de la terminal: pip install -r requirements.txt
+Con el comando dentro de la terminal:
+
+```bash
+pip install -r requirements.txt
+```
 
 ### 3) Crear archivo .env
 
@@ -51,4 +58,8 @@ Dentro del archivo colocar los tokens y url necesarios.
 
 ### 4) Ejecutar con el proyecto
 
-Con el comando en la terminal: python globalflow_code.py
+Con el comando en la terminal:
+
+```bash
+python globalflow_code.py
+```
