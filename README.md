@@ -1,115 +1,106 @@
-# GlobalFlow Logistics - Agentes con LangChain + LangGraph
+# GlobalFlow Logistics - Agentes con LangChain Classic + RAG
 
-Proyecto base para implementar un flujo de clasificación arancelaria con agentes especializados:
-
-1. Extracción de factura.
-2. Normalización de descripción.
-3. Recuperación RAG.
-4. Clasificación arancelaria.
-5. Validación normativa.
-6. Reglas de negocio.
-7. Revisión humana cuando corresponda.
-
-## Documentación base
+## Estructura principal
 
 ```text
-GlobalFlow-solucionesIA/
-├── documentation/
-│   ├── Documentación Caso GlobalFlow Logistics.docx
-│   ├── base_arancelaria_sintetica_globalflow.xlsx
-│   ├── facturas_historicas_sinteticas_globalflow.xlsx
-│   └── manual_normativo_sintetico_globalflow.docx
-└── globalflow/
+app/
+├── agents.py              # Agentes especializados del flujo
+├── orchestrator.py        # Orquestador secuencial de agentes
+├── planner.py             # Planificador del flujo
+├── memory.py              # Memoria/trazabilidad de ejecución
+├── langchain_compat.py    # Imports compatibles con langchain_classic
+├── rag.py                 # Índice RAG con Chroma
+├── tools.py               # Herramientas externas: aranceles e históricos
+├── repository_data.py     # Lectura de documentation/*.xlsx y *.docx
+├── prompts.py             # Prompts de cada agente
+├── models.py              # Modelos Pydantic de entrada/salida
+├── ingest.py              # Crea el índice RAG
+└── main.py                # Punto de ejecución
+```
+
+## Datos esperados
+
+El código está preparado para leer la carpeta `documentation` del repositorio `GlobalFlow-solucionesIA`:
+
+```text
+documentation/
+├── Documentación Caso GlobalFlow Logistics.docx
+├── base_arancelaria_sintetica_globalflow.xlsx
+├── facturas_historicas_sinteticas_globalflow.xlsx
+└── manual_normativo_sintetico_globalflow.docx
+```
+
+También mantiene fallback a:
+
+```text
+data/aranceles.csv
+data/historicos.csv
+data/manuales/*.pdf
+data/manuales/*.txt
 ```
 
 ## Instalación
 
 ```bash
 python -m venv .venv
-.venv\Scripts\activate  # Windows
-# source .venv/bin/activate  # Linux/Mac
+.venv\Scripts\activate
 pip install -r requirements.txt
-copy .env.example .env  # Windows
-# cp .env.example .env  # Linux/Mac
+copy .env.example .env
 ```
 
 Edita `.env` y agrega tu `GITHUB_TOKEN`.
 
-## Archivos usados
-
-La solución prioriza estos archivos:
-
-- `documentation/base_arancelaria_sintetica_globalflow.xlsx`: base arancelaria estructurada.
-- `documentation/facturas_historicas_sinteticas_globalflow.xlsx`: casos históricos para RAG.
-- `documentation/manual_normativo_sintetico_globalflow.docx`: manual normativo para RAG.
-
 ## Crear índice RAG
-
-Antes de ejecutar clasificaciones, crea o actualiza la base vectorial:
 
 ```bash
 python -m app.ingest
 ```
 
-Esto carga:
+Ejecuta este comando cuando agregues o modifiques documentos en `documentation`.
 
-- el manual normativo `.docx`,
-- la documentación del caso `.docx`,
-- las filas del Excel de facturas históricas,
-- y las filas del Excel de base arancelaria.
-
-## Ejecutar flujo con una factura TXT
-
-```bash
-python -m app.main data/facturas/factura_demo.txt
-```
-
-## Ejecutar flujo con texto directo
+## Ejecutar con texto directo
 
 ```bash
 python -m app.main --text "Factura N° 01. Producto: T-shirt algodón caballero blanco. Cantidad: 100 unidades. Origen: Chile. Destino: España."
 ```
 
-## Resultado
+## Ejecutar con archivo TXT
 
-El resultado final se imprime en consola y también se guarda en:
-
-```text
-data/resultados/
+```bash
+python -m app.main data/facturas/factura_demo.txt
 ```
 
-El JSON generado incluye:
-
-- datos extraídos,
-- descripción normalizada,
-- evidencia recuperada,
-- clasificación propuesta,
-- validación normativa,
-- resultado final aprobado o revisión humana.
-
-## Flujo LangGraph
+## Flujo implementado
 
 ```text
-START
+Planificación
   ↓
-extract
+AgenteExtractor
   ↓
-normalize
+AgenteNormalizador
   ↓
-rag
+AgenteHerramientasRAG
   ↓
-classify
+AgenteClasificador
   ↓
-validate
+AgenteValidador
   ↓
-rules
+AgenteReglasNegocio
   ↓
-¿requiere revisión humana?
-  ├── sí → human_review → save_result
-  └── no → save_result
+Resultado aprobado o revisión humana
 ```
 
-## Notas importantes
+## Diferencia con la versión anterior
 
-- Si no existe la carpeta `documentation`, el código usará los archivos de ejemplo en `data/` como fallback.
-- El sistema requiere conexión a GitHub Models mediante `GITHUB_TOKEN` para ejecutar los agentes LLM.
+La versión anterior usaba una estructura basada en `LangGraph`. Funcionaba, pero era más difícil de leer si recién estás estudiando agentes. Esta versión mantiene el mismo objetivo, pero lo organiza con clases simples:
+
+- `BaseGlobalFlowAgent`
+- `ExtractionAgent`
+- `NormalizationAgent`
+- `ToolRAGAgent`
+- `ClassificationAgent`
+- `ValidationAgent`
+- `BusinessRulesAgent`
+- `GlobalFlowOrchestrator`
+
+Así puedes explicar mejor el código según lo estudiado en RA2.
