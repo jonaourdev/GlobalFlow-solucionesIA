@@ -1,7 +1,0 @@
-Factura N° 2026-001
-Cliente: Importadora Demo SpA
-Producto: T-shirt alg. caballero blanco pack 100 unid.
-Cantidad: 100 unidades
-Origen: Chile
-Destino: España
-Descripción comercial: poleras básicas de algodón para hombre.
