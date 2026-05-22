@@ -1,1 +1,5 @@
 .env
+LLM+RAG
+.chroma
+.venv
+__pycache__
