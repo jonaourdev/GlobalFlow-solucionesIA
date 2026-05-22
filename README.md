@@ -89,18 +89,3 @@ AgenteReglasNegocio
   ↓
 Resultado aprobado o revisión humana
 ```
-
-## Diferencia con la versión anterior
-
-La versión anterior usaba una estructura basada en `LangGraph`. Funcionaba, pero era más difícil de leer si recién estás estudiando agentes. Esta versión mantiene el mismo objetivo, pero lo organiza con clases simples:
-
-- `BaseGlobalFlowAgent`
-- `ExtractionAgent`
-- `NormalizationAgent`
-- `ToolRAGAgent`
-- `ClassificationAgent`
-- `ValidationAgent`
-- `BusinessRulesAgent`
-- `GlobalFlowOrchestrator`
-
-Así puedes explicar mejor el código según lo estudiado en RA2.
