@@ -1,0 +1,16 @@
+FACTURA N° GF-TEST-002
+Proveedor: Global Parts Supplier
+Cliente: Importadora Técnica Andina
+País de origen: China
+País de destino: Chile
+Fecha: 23-05-2026
+
+Detalle de productos:
+Producto: Accesorio técnico multifunción
+Descripción comercial: Componente multipropósito para uso industrial general. Puede ser utilizado como accesorio, soporte, pieza complementaria o elemento de ajuste según requerimiento del cliente.
+Material principal: No especificado
+Cantidad: 50 unidades
+Valor FOB: USD 2.750
+
+Observaciones:
+La descripción no indica con claridad el tipo exacto de producto, su función principal, material predominante ni categoría técnica específica.

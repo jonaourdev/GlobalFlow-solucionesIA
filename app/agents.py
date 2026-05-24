@@ -184,7 +184,8 @@ class BusinessRulesAgent(BaseGlobalFlowAgent):
             explicacion = validation.explicacion
         elif (
             validation.veredicto == "corregido"
-            and classification.nivel_confianza >= settings.confidence_auto_approve
+            and validation.codigo_final
+            and classification.nivel_confianza >= settings.confidence_auto_approval
             and not requiere_revision
         ):
             estado = "aprobado"
@@ -192,7 +193,7 @@ class BusinessRulesAgent(BaseGlobalFlowAgent):
             explicacion = validation.explicacion
         else:
             estado = "revision_humana"
-            codigo_final = validation.codigo_final or classification.codigo_sugerido
+            codigo_final = None
             explicacion = " ".join(motivos) or validation.explicacion
 
         return FinalResult(

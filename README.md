@@ -70,6 +70,20 @@ python -m app.main --text "Factura N° 01. Producto: T-shirt algodón caballero 
 python -m app.main data/facturas/factura_demo.txt
 ```
 
+## Ejecutar con archivos TXT con distintos resultados
+
+```bash
+python -m app.main data/facturas/factura_01_aprobacion_automatica.txt
+```
+
+```bash
+python -m app.main data/facturas/factura_02_revision_humana_ambigua.txt
+```
+
+```bash
+python -m app.main data/facturas/factura_03_correccion_o_escalamiento.txt
+```
+
 ## Flujo implementado
 
 ```text

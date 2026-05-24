@@ -1,0 +1,16 @@
+FACTURA N° GF-TEST-001
+Proveedor: Textile Export Chile SpA
+Cliente: Comercial Europa Textil Ltda.
+País de origen: Chile
+País de destino: España
+Fecha: 23-05-2026
+
+Detalle de productos:
+Producto: T-shirt algodón caballero blanco
+Descripción comercial: Camiseta / polera de algodón para hombre, color blanco, uso vestuario.
+Material principal: Algodón
+Cantidad: 100 unidades
+Valor FOB: USD 1.200
+
+Observaciones:
+Producto textil claramente identificado como prenda de vestir de algodón para hombre.

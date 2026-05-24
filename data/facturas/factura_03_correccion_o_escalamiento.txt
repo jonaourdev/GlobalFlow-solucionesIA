@@ -1,0 +1,16 @@
+FACTURA N° GF-TEST-003
+Proveedor: SportWear International
+Cliente: Distribuidora Deportiva Global
+País de origen: Vietnam
+País de destino: Chile
+Fecha: 23-05-2026
+
+Detalle de productos:
+Producto: Zapato deportivo de cuero sintético
+Descripción comercial: Calzado deportivo para entrenamiento, elaborado con material sintético tipo cuero, suela de goma y diseño para actividad física.
+Material principal: Cuero sintético / material plástico
+Cantidad: 80 pares
+Valor FOB: USD 4.800
+
+Observaciones:
+El producto podría relacionarse con categorías de calzado deportivo, pero también contiene material sintético tipo cuero. Requiere validar si la clasificación corresponde por uso, material predominante o tipo de calzado.

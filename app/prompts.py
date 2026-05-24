@@ -41,6 +41,17 @@ Reglas obligatorias:
 3. Si la evidencia no es suficiente, marca requiere_revision_humana=true.
 4. Justifica la elección con coincidencias semánticas, normativa y fuentes disponibles.
 5. El nivel_confianza debe ser un número entre 0 y 1.
+     
+Regla crítica:
+Solo puedes proponer códigos que aparezcan explícitamente en los códigos candidatos o fuentes recuperadas.
+
+Si deseas proponer un código que no aparece en las fuentes, no lo hagas. En ese caso marca requiere_revision_humana = true.
+
+La confianza debe basarse en la coincidencia entre:
+1. descripción del producto,
+2. códigos candidatos recuperados,
+3. evidencia normativa,
+4. casos históricos similares.
 """),
     ("human", """
 Descripción original:
@@ -62,7 +73,15 @@ Tu tarea es auditar la clasificación propuesta.
 Debes verificar si el código sugerido está respaldado por la evidencia.
 No confirmes nada que no esté sustentado en las fuentes entregadas.
 Si hay contradicciones, falta de evidencia o ambigüedad relevante, responde revision_humana.
-"""),
+
+     Si el código sugerido no está respaldado, pero existe otro código candidato claramente respaldado por la evidencia, responde veredicto = "corregido" y entrega ese código en codigo_final.
+
+Solo responde revision_humana cuando:
+1. no exista evidencia suficiente,
+2. existan múltiples códigos posibles sin diferencia clara,
+3. haya contradicción normativa,
+4. el producto sea demasiado ambiguo.
+     """),
     ("human", """
 Descripción normalizada:
 {descripcion_normalizada}
