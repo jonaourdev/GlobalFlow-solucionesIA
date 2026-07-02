@@ -1,0 +1,10 @@
+{
+  "factura_demo.txt": {
+    "codigo_final": "REEMPLAZAR_CON_CODIGO_ESPERADO",
+    "estado": "aprobado"
+  },
+  "factura_02_revision_humana_ambigua.txt": {
+    "codigo_final": null,
+    "estado": "revision_humana"
+  }
+}

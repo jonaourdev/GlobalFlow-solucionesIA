@@ -185,7 +185,7 @@ class BusinessRulesAgent(BaseGlobalFlowAgent):
         elif (
             validation.veredicto == "corregido"
             and validation.codigo_final
-            and classification.nivel_confianza >= settings.confidence_auto_approval
+            and classification.nivel_confianza >= settings.confidence_auto_approve
             and not requiere_revision
         ):
             estado = "aprobado"

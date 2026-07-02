@@ -15,6 +15,10 @@ app/
 ├── prompts.py             # Prompts de cada agente
 ├── models.py              # Modelos Pydantic de entrada/salida
 ├── ingest.py              # Crea el índice RAG
+├── observability.py       # Cálculo de metricas, logs, seguridad y recomendaciones
+├── dashboard.py           # Generación del Dashboard
+├── evaluate.py            # Evaluación por lote de facturas
+├── orchestrator.py        # Instrumentación del flujo de agentes
 └── main.py                # Punto de ejecución
 ```
 
@@ -82,6 +86,52 @@ python -m app.main data/facturas/factura_02_revision_humana_ambigua.txt
 
 ```bash
 python -m app.main data/facturas/factura_03_correccion_o_escalamiento.txt
+```
+
+## Observabilidad, trazabilidad y dashboard
+
+Cada ejecución registra métricas y trazas estructuradas para evaluar precisión, latencia, consistencia, puntos de falla y señales de seguridad.
+
+Archivos generados:
+
+```text
+data/observability/
+├── execution_logs.jsonl      # Logs por paso/agente con duración, estado y salida resumida
+├── metrics.jsonl             # Métricas agregadas por ejecución
+├── dashboard.html            # Dashboard local en HTML
+└── runs/*.json               # Métricas completas por run_id
+```
+
+Genera solo el dashboard desde métricas ya existentes:
+
+```bash
+python -m app.dashboard
+```
+
+Ejecuta una factura y actualiza el dashboard automáticamente:
+
+```bash
+python -m app.main data/facturas/factura_demo.txt
+```
+
+Evalúa todas las facturas de prueba para medir variabilidad de datos:
+
+```bash
+python -m app.evaluate --input-dir data/facturas
+```
+
+Para medir precisión real, crea `data/observability/ground_truth.json` usando como base `data/observability/ground_truth.example.json` y completa `codigo_final`/`estado` esperados por archivo. Si no existe ground truth, el sistema reporta `precision_estimada`, calculada desde confianza, evidencia, validación y consistencia.
+
+Métricas incluidas:
+
+```text
+- Precisión real: compara salida con ground_truth.json cuando existe.
+- Precisión estimada: proxy basado en confianza, evidencia, validación y consistencia.
+- Latencia: duración total y por paso del flujo.
+- Consistencia: alineación entre clasificador, validador y reglas de negocio.
+- Trazabilidad: logs JSONL por agente, estado, duración y salida resumida redactada.
+- Seguridad: detección de prompt injection, posibles datos personales y secretos en entrada.
+- Optimización: recomendaciones automáticas por latencia, baja evidencia, ambigüedad o fallas.
 ```
 
 ## Flujo implementado

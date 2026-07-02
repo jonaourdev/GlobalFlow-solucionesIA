@@ -1,7 +1,12 @@
 import os
 from dataclasses import dataclass
 from pathlib import Path
-from dotenv import load_dotenv
+
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    def load_dotenv() -> bool:
+        return False
 
 load_dotenv()
 
@@ -30,6 +35,7 @@ class Settings:
 
     chroma_dir: str = os.getenv("CHROMA_DIR", ".chroma/globalflow")
     results_dir: str = os.getenv("RESULTS_DIR", "data/resultados")
+    observability_dir: str = os.getenv("OBSERVABILITY_DIR", "data/observability")
     confidence_auto_approve: float = float(os.getenv("CONFIDENCE_AUTO_APPROVE", "0.85"))
     confidence_human_review: float = float(os.getenv("CONFIDENCE_HUMAN_REVIEW", "0.70"))
 
@@ -68,7 +74,8 @@ def resolve_data_file(*parts: str) -> Path:
 
 
 def ensure_env() -> None:
-    if not settings.github_token:
+    invalid_tokens = {"", "AQUI PONER TU TOKEN", "YOUR_GITHUB_TOKEN", "GITHUB_TOKEN"}
+    if settings.github_token.strip() in invalid_tokens:
         raise RuntimeError(
-            "Falta GITHUB_TOKEN. Crea un archivo .env basado en .env.example y agrega tu token."
+            "Falta configurar GITHUB_TOKEN en .env. Reemplaza el valor de ejemplo por un token valido para GitHub Models."
         )

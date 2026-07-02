@@ -19,8 +19,8 @@ class AgentMemory:
                 return_messages=True,
             )
 
-    def add(self, paso: str, agente: str, detalle: str) -> None:
-        trace = ExecutionTrace(paso=paso, agente=agente, detalle=detalle)
+    def add(self, paso: str, agente: str, detalle: str, trace: ExecutionTrace | None = None) -> None:
+        trace = trace or ExecutionTrace(paso=paso, agente=agente, detalle=detalle)
         self.traces.append(trace)
 
         if self.langchain_memory is not None:
