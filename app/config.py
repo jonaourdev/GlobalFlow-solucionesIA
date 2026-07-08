@@ -5,10 +5,15 @@ from pathlib import Path
 try:
     from dotenv import load_dotenv
 except ImportError:
-    def load_dotenv() -> bool:
+    def load_dotenv(*args, **kwargs) -> bool:
         return False
 
-load_dotenv()
+ENV_PATH = Path(__file__).resolve().parents[1] / ".env"
+
+load_dotenv(
+    dotenv_path=ENV_PATH,
+    override=True,
+)
 
 
 @dataclass(frozen=True)

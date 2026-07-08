@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GlobalFlow Observabilidad</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --text: #17202a;
+      --muted: #64748b;
+      --line: #d9e0e8;
+      --blue: #2563eb;
+      --green: #16803c;
+      --amber: #b7791f;
+      --red: #b42318;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Segoe UI, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    header {
+      padding: 28px 36px 18px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+    }
+    h1 { margin: 0; font-size: 28px; letter-spacing: 0; }
+    header p { margin: 8px 0 0; color: var(--muted); }
+    main { padding: 24px 36px 40px; }
+    section { margin-bottom: 24px; }
+    h2 { font-size: 18px; margin: 0 0 12px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 12px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .card span { display: block; color: var(--muted); font-size: 13px; }
+    .card strong { display: block; margin: 8px 0; font-size: 26px; }
+    .card small { color: var(--muted); line-height: 1.35; }
+    .card.good { border-left: 4px solid var(--green); }
+    .card.warn { border-left: 4px solid var(--amber); }
+    .card.bad { border-left: 4px solid var(--red); }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      overflow-x: auto;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 10px 8px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: middle; }
+    th { color: var(--muted); font-weight: 600; }
+    .bar { width: 100%; min-width: 160px; height: 10px; background: #e8edf3; border-radius: 999px; overflow: hidden; }
+    .bar i { display: block; height: 100%; background: var(--blue); }
+    ul { margin: 0; padding-left: 20px; }
+    li { margin: 8px 0; line-height: 1.45; }
+    code { background: #eef2f7; border-radius: 4px; padding: 2px 5px; }
+    .empty { color: var(--muted); margin: 0; }
+    @media (max-width: 720px) {
+      header, main { padding-left: 18px; padding-right: 18px; }
+      h1 { font-size: 23px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>GlobalFlow Observabilidad</h1>
+    <p>Métricas de precisión, latencia, consistencia, trazabilidad, seguridad y recomendaciones. Fuente: <code>data\observability\metrics.jsonl</code></p>
+  </header>
+  <main>
+    <section class="grid">
+      
+        <article class="card neutral">
+          <span>Ejecuciones</span>
+          <strong>3</strong>
+          <small>Total de corridas observadas</small>
+        </article>
+        
+
+        <article class="card good">
+          <span>Aprobadas</span>
+          <strong>2</strong>
+          <small>1 enviadas a revisión humana</small>
+        </article>
+        
+
+        <article class="card warn">
+          <span>Precisión real</span>
+          <strong>sin etiqueta</strong>
+          <small>Usa ground_truth.json cuando existe</small>
+        </article>
+        
+
+        <article class="card good">
+          <span>Precisión estimada</span>
+          <strong>90.5%</strong>
+          <small>Proxy por confianza, evidencia y validación</small>
+        </article>
+        
+
+        <article class="card good">
+          <span>Consistencia</span>
+          <strong>100.0%</strong>
+          <small>Alineación clasificador/validador/reglas</small>
+        </article>
+        
+
+        <article class="card neutral">
+          <span>Latencia media</span>
+          <strong>19248 ms</strong>
+          <small>Tiempo promedio end-to-end</small>
+        </article>
+        
+    </section>
+
+    <section>
+      <h2>Latencia por Paso</h2>
+      <div class="panel"><table><thead><tr><th>Paso</th><th>Latencia media</th><th>Comparación</th></tr></thead><tbody>
+            <tr>
+              <td>herramientas_rag</td>
+              <td>6086 ms</td>
+              <td><div class="bar"><i style="width:100.0%"></i></div></td>
+            </tr>
+            
+            <tr>
+              <td>clasificacion</td>
+              <td>4136 ms</td>
+              <td><div class="bar"><i style="width:68.0%"></i></div></td>
+            </tr>
+            
+            <tr>
+              <td>extraccion</td>
+              <td>3493 ms</td>
+              <td><div class="bar"><i style="width:57.4%"></i></div></td>
+            </tr>
+            
+            <tr>
+              <td>normalizacion</td>
+              <td>3476 ms</td>
+              <td><div class="bar"><i style="width:57.1%"></i></div></td>
+            </tr>
+            
+            <tr>
+              <td>validacion</td>
+              <td>2050 ms</td>
+              <td><div class="bar"><i style="width:33.7%"></i></div></td>
+            </tr>
+            
+            <tr>
+              <td>reglas_negocio</td>
+              <td>0 ms</td>
+              <td><div class="bar"><i style="width:4.0%"></i></div></td>
+            </tr>
+            
+            <tr>
+              <td>planificacion</td>
+              <td>0 ms</td>
+              <td><div class="bar"><i style="width:4.0%"></i></div></td>
+            </tr>
+            </tbody></table></div>
+    </section>
+
+    <section>
+      <h2>Ejecuciones Recientes</h2>
+      <div class="panel"><table><thead><tr><th>Archivo</th><th>Estado</th><th>Precisión real</th><th>Precisión estimada</th><th>Consistencia</th><th>Latencia</th><th>Fallas</th><th>Seguridad</th></tr></thead><tbody>
+            <tr>
+              <td>factura_03_correccion_o_escalamiento.txt</td>
+              <td>revision_humana</td>
+              <td>sin etiqueta</td>
+              <td>88.5%</td>
+              <td>100.0%</td>
+              <td>19858 ms</td>
+              <td>2</td>
+              <td>0</td>
+            </tr>
+            
+            <tr>
+              <td>factura_01_aprobacion_automatica.txt</td>
+              <td>aprobado</td>
+              <td>sin etiqueta</td>
+              <td>91.5%</td>
+              <td>100.0%</td>
+              <td>18679 ms</td>
+              <td>1</td>
+              <td>0</td>
+            </tr>
+            
+            <tr>
+              <td>factura_demo.txt</td>
+              <td>aprobado</td>
+              <td>sin etiqueta</td>
+              <td>91.5%</td>
+              <td>100.0%</td>
+              <td>19207 ms</td>
+              <td>1</td>
+              <td>0</td>
+            </tr>
+            </tbody></table></div>
+    </section>
+
+    <section>
+      <h2>Puntos de Falla</h2>
+      <div class="panel"><ul><li><strong>3x</strong> La normalización detectó ambigüedades semánticas.</li>
+<li><strong>1x</strong> El validador normativo escaló el caso a revisión humana.</li></ul></div>
+    </section>
+
+    <section>
+      <h2>Recomendaciones de Optimización</h2>
+      <div class="panel"><ul><li><strong>3x</strong> Crear reglas de desambiguación por familia de producto para reducir escalamiento manual.</li>
+<li><strong>3x</strong> Priorizar los puntos de falla detectados en trazabilidad antes de escalar el flujo a más documentos.</li>
+<li><strong>1x</strong> Registrar motivo de revisión humana como etiqueta para mejorar precisión real en futuras evaluaciones.</li></ul></div>
+    </section>
+  </main>
+</body>
+</html>

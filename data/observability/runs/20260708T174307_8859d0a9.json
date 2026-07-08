@@ -1,0 +1,40 @@
+{
+  "run_id": "20260708T174307_8859d0a9",
+  "archivo": "factura_03_correccion_o_escalamiento.txt",
+  "timestamp_inicio": "2026-07-08T17:43:07.575758+00:00",
+  "timestamp_fin": "2026-07-08T17:43:27.433884+00:00",
+  "duracion_total_ms": 19858.27,
+  "latencia_por_paso_ms": {
+    "planificacion": 0.02,
+    "extraccion": 3395.8,
+    "normalizacion": 3767.65,
+    "herramientas_rag": 6067.89,
+    "clasificacion": 4593.28,
+    "validacion": 2026.49,
+    "reglas_negocio": 0.03
+  },
+  "precision_real": null,
+  "precision_estimada": 0.885,
+  "consistencia_score": 1.0,
+  "confianza_clasificacion": 0.9,
+  "evidencia_total": 13,
+  "evidencia_por_tipo": {
+    "base_arancelaria": 8,
+    "historico": 3,
+    "manual_normativo": 2
+  },
+  "campos_faltantes_total": 0,
+  "ambiguedades_total": 1,
+  "estado_final": "revision_humana",
+  "requiere_revision_humana": true,
+  "fallas_detectadas": [
+    "La normalización detectó ambigüedades semánticas.",
+    "El validador normativo escaló el caso a revisión humana."
+  ],
+  "security_signals": [],
+  "recomendaciones": [
+    "Crear reglas de desambiguación por familia de producto para reducir escalamiento manual.",
+    "Registrar motivo de revisión humana como etiqueta para mejorar precisión real en futuras evaluaciones.",
+    "Priorizar los puntos de falla detectados en trazabilidad antes de escalar el flujo a más documentos."
+  ]
+}
